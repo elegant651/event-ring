@@ -5,6 +5,7 @@ import apiPost from 'utils/apiPost';
 import { Button, Text, HStack, Avatar, useToast } from '@chakra-ui/react';
 import { getEllipsisTxt } from 'utils/format';
 import UAuth from '@uauth/js'
+import { useState } from 'react';
 
 const ConnectButton = () => {
   const { connectAsync } = useConnect({ connector: new InjectedConnector() });
@@ -13,6 +14,7 @@ const ConnectButton = () => {
   const { signMessageAsync } = useSignMessage();
   const toast = useToast();
   const { data } = useSession();
+  const [userAccount, setUserAccount] = useState<any>()
 
   const uauth = new UAuth({
     clientID: process.env.NEXT_PUBLIC_UAUTH_CLIENT_ID,
@@ -23,9 +25,17 @@ const ConnectButton = () => {
     try {
       const authorization = await uauth.loginWithPopup()
    
-      console.log(authorization)
+      const account = uauth.getAuthorizationAccount(authorization)
+      setUserAccount(account);
+      
     } catch (error) {
-      console.error(error)
+      toast({
+        title: 'Oops, something is wrong...',
+        description: (error as { message: string })?.message,
+        status: 'error',
+        position: 'top-right',
+        isClosable: true,
+      });
     }
   }
 
@@ -66,11 +76,12 @@ const ConnectButton = () => {
     signOut({ callbackUrl: '/' });
   };
 
-  if (data?.user) {
+  if (data?.user || userAccount) {
+    const address = data?.user ? data.user.address : userAccount.address
     return (
       <HStack onClick={handleDisconnect} cursor={'pointer'}>
         <Avatar size="xs" />
-        <Text fontWeight="medium">{getEllipsisTxt(data.user.address)}</Text>
+        <Text fontWeight="medium">{getEllipsisTxt(address)}</Text>
       </HStack>
     );
   }
