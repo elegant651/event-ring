@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export function useCovalent() {
 
-  const API_KEY = process.env.NEXT_PUBLIC_COVALENT_KEY
+  const API_KEY = process.env.COVALENT_KEY
   const chainId = 80001; //matic-mumbai , 137 -matic
 
   const getNFTTokenIdsForContract = async (contractAddress: string) => {

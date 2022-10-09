@@ -17,8 +17,8 @@ const ConnectButton = () => {
   const [userAccount, setUserAccount] = useState<any>()
 
   const uauth = new UAuth({
-    clientID: process.env.NEXT_PUBLIC_UAUTH_CLIENT_ID,
-    redirectUri: process.env.NEXT_PUBLIC_UAUTH_REDIRECT_URI
+    clientID: process.env.UAUTH_CLIENT_ID,
+    redirectUri: process.env.UAUTH_REDIRECT_URI
   })
 
   const handleUAuth = async () => {
