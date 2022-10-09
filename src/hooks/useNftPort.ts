@@ -6,7 +6,7 @@ export function useNftPort() {
   const METADATA_URI = 'bafkreiczu5gz5swlb4hvpdkh25n3dkgcmquapgfmkufyoogac6i5gvumdi'
   const METADATA_IMG = 'https://ipfs.io/ipfs/bafkreiftkw4huljmjwykewkd3rkvl5yyv3vdsk2js3ws3huznwx2inokve'
 
-  const API_KEY = process.env.NFTPORT_KEY
+  const API_KEY = process.env.NEXT_PUBLIC_NFTPORT_KEY
 
 
   const uploadFileToIPFS = async (file: any) => {

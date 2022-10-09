@@ -66,7 +66,7 @@ const WriteComment = () => {
         </FormControl>
 
         <WorldIDWidget
-          actionId={process.env.WORLD_COIN_ACTION_ID} // obtain this from developer.worldcoin.org
+          actionId={process.env.NEXT_PUBLIC_WORLD_COIN_ACTION_ID} // obtain this from developer.worldcoin.org
           signal="my_signal"
           enableTelemetry
           onSuccess={(verificationResponse) => console.log(verificationResponse)} // you'll actually want to pass the proof to the API or your smart contract

@@ -6,8 +6,8 @@ export const injected = {}
 export const walletconnect = {provider: 'walletconnect'}
 
 UAuthMoralisConnector.setUAuthOptions({
-  clientID: process.env.UAUTH_CLIENT_ID!,
-  redirectUri: process.env.UAUTH_REDIRECT_URI!,
+  clientID: process.env.NEXT_PUBLIC_UAUTH_CLIENT_ID!,
+  redirectUri: process.env.NEXT_PUBLIC_UAUTH_REDIRECT_URI!,
 
   // Scope must include openid and wallet
   scope: 'openid wallet',
