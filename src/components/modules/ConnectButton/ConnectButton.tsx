@@ -26,7 +26,8 @@ const ConnectButton = () => {
       const authorization = await uauth.loginWithPopup()
    
       const account = uauth.getAuthorizationAccount(authorization)
-      setUserAccount(account);
+      console.log('acc', account)
+      setUserAccount(account?.address);
       
     } catch (error) {
       toast({
@@ -38,6 +39,16 @@ const ConnectButton = () => {
       });
     }
   }
+
+  uauth.user()
+  .then((user) => {
+    // user exists
+    console.log("User information:", user)
+    setUserAccount(user.sub);
+  })
+  .catch(() => {
+    // user does not exist
+  })
 
 
   const handleAuth = async () => {
@@ -77,7 +88,7 @@ const ConnectButton = () => {
   };
 
   if (data?.user || userAccount) {
-    const address = data?.user ? data.user.address : userAccount.address
+    const address = data?.user ? data.user.address : userAccount
     return (
       <HStack onClick={handleDisconnect} cursor={'pointer'}>
         <Avatar size="xs" />
